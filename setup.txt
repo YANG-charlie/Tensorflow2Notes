@@ -1,0 +1,51 @@
+I. <Set up Tensorflow CPU in Google Cloud>
+  start an Ubuntu 18.04 instance, SSH to it.
+  1. install Python2:
+    sudo apt install python
+  2. install pip pip3
+     sudo apt-get install software-properties-common
+     sudo apt-add-repository universe # add source to ubuntu
+     sudo apt install python-pip
+     sudo apt install python3-pip
+     sudo pip3 install virtualenv
+  3. install tensorflow in Virtual Env
+     1) tensorflow2
+      mkdir ~/envirment
+      cd ~/environment/
+      virtualenv --system-site-packages -p python3 ./tf2_py3
+      source ./tf2_py3/bin/activate
+      (tf2_py3)pip install --upgrade pip
+      (tf2_py3)pip install tensorflow  numpy pandas matplotlib sklearn jupyter
+     2) tensorflow1
+      cd ~/environment/
+      virtualenv --system-site-packages -p python3 ./tf1_py3
+      source ./tf2_py3/bin/activate
+      (tf2_py3)pip install --upgrade pip
+      (tf2_py3)pip install tensorflow==1.1.15 
+      (tf2_py3)pip numpy pandas matplotlib sklearn jupyter
+  4. Configure Jupyter notebook to connect from local laptop to google cloud
+    1)set configure file in ubuntu:
+      cd ~
+      jupyter notebook --generate-config
+      cd .jupyter/
+      vim jupyter_notebook_config.py:
+              #Configuration file for jupyter-notebook.
+              c=get_config()
+              c.NotebookApp.ip='*'
+			  c.NotebookApp.open_browser=False
+			  c.NotebookApp.port=6025  # this port need to be in the range of instance firewall open port
+			  c.NotebookApp.allow_remote_access = True
+	2) set google cloud ip and port:
+	  1. set google cloud instance ip to static ip
+	  2. set a rule for firewall:
+	       IP range: 0.0.0.0/0 # all instance can get access
+	       port: tcp:6000-6500 
+	3) mkdir ~/workspace
+	   jupyter notebook
+	   open brower in local with instance static ip:port set for Jupyter.
+
+
+
+
+
+
