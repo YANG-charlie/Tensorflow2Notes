@@ -43,6 +43,7 @@ I. <Set up Tensorflow CPU in Google Cloud>
 	3) mkdir ~/workspace
 	   jupyter notebook
 	   open brower in local with instance static ip:port set for Jupyter.
+     #first time need to use token to set a password.
 
 
 
